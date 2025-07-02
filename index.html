@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SupportHub</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #333;
+      color: #fff;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 50px 20px;
+      background: #f4f4f4;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .faq,
+    .support-options,
+    .contact-form {
+      margin: 40px 0;
+    }
+
+    .faq select {
+      width: 100%;
+      max-width: 600px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    .faq-answer {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      display: none;
+    }
+
+    .support-option {
+      display: inline-block;
+      width: 45%;
+      margin: 10px;
+      padding: 20px;
+      background: #fff;
+      border: 1px solid #ddd;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .support-option:hover {
+      background: #f0f0f0;
+    }
+
+    .success-message {
+      display: none;
+      color: green;
+      margin-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #333;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>SupportHub</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#support">Support</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>How can we help you today?</h2>
+    <p>Find answers to your questions or get in touch with our support team.</p>
+  </section>
+
+  <div class="container">
+    <!-- FAQ Section -->
+    <section class="faq">
+      <h2>Frequently Asked Questions</h2>
+      <select id="faqDropdown" onchange="showAnswer()">
+        <option value="" disabled selected>Select a question...</option>
+        <option value="0">How do I place an order?</option>
+        <option value="1">What are your delivery hours?</option>
+        <option value="2">What payment methods do you accept?</option>
+        <option value="3">How can I track my order?</option>
+        <option value="4">What is your refund policy?</option>
+      </select>
+      <div class="faq-answer" id="faqAnswer"></div>
+    </section>
+
+    <!-- Support Options -->
+    <section class="support-options">
+      <div class="support-option" onclick="launchChat()">
+        <h3>Live Chat</h3>
+        <p>Click here to chat with our SupportBot.</p>
+      </div>
+      <div class="support-option">
+        <h3>Guides</h3>
+        <p>Access detailed guides and tutorials to help you get started.</p>
+        <a href="#">View Guides</a>
+      </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="contact-form" id="contact">
+      <h2>Contact Us</h2>
+      <form id="contactForm">
+        <div>
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit">Send Message</button>
+      </form>
+      <div class="success-message" id="successMessage">
+        Thank you, our team will contact you shortly.
+      </div>
+    </section>
+  </div>
+
+  <!-- Chatbot Container -->
+  <div id="webchat"></div>
+
+  <!-- Rasa Webchat Loader -->
+  <script src="https://cdn.jsdelivr.net/npm/rasa-webchat/lib/index.min.js"></script>
+  <script>
+    function launchChat() {
+      WebChat.default.init({
+        selector: "#webchat",
+        initPayload: "/greet",
+        customData: {},
+        socketUrl: "http://localhost:5005",
+        socketPath: "/socket.io/",
+        title: "SupportBot",
+        subtitle: "Ask me anything about your food order",
+        inputTextFieldHint: "Type your message...",
+        showFullScreenButton: true,
+        showMessageDate: true,
+        params: {
+          storage: "session"
+        }
+      });
+    }
+  </script>
+
+  <footer>
+    <p>© 2025 SupportHub. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // FAQ logic
+    const faqAnswers = [
+      "Browse our menu, add items to your cart, and proceed to checkout. You'll enter delivery and payment details.",
+      "Our delivery hours are 10:00 AM to 10:00 PM, daily.",
+      "We accept credit/debit cards (Visa, Mastercard, RuPay), NetBanking, UPI, and Cash on Delivery.",
+      "Once confirmed, you'll get a tracking link via email. You can also log into your account.",
+      "Refunds are issued for incorrect or damaged orders. Please see our full refund policy for details."
+    ];
+
+    function showAnswer() {
+      const dropdown = document.getElementById("faqDropdown");
+      const answerDiv = document.getElementById("faqAnswer");
+      const selectedIndex = dropdown.value;
+
+      if (selectedIndex === "") {
+        answerDiv.style.display = "none";
+        answerDiv.textContent = "";
+      } else {
+        answerDiv.style.display = "block";
+        answerDiv.textContent = faqAnswers[selectedIndex];
+      }
+    }
+
+    // Contact form logic
+    document.getElementById("contactForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const successMessage = document.getElementById("successMessage");
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch("/contact", {
+          method: "POST",
+          body: formData,
+        });
+        const data = await response.json();
+
+        if (data.success) {
+          successMessage.style.display = "block";
+          form.reset();
+        } else {
+          alert(data.message);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Sorry, something went wrong. Please try again.");
+      }
+    });
+  </script>
+</body>
+</html>

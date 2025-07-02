@@ -1,1 +1,1 @@
-# internshipchatbot
+# chatbot
