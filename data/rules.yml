@@ -1,0 +1,27 @@
+version: "3.1"
+rules:
+
+- rule: Answer how to place an order
+  steps:
+    - intent: ask_how_do_i_place_an_order
+    - action: utter_ask_how_do_i_place_an_order
+
+- rule: Answer account requirement
+  steps:
+    - intent: ask_do_i_need_an_account_to_order
+    - action: utter_ask_do_i_need_an_account_to_order
+
+- rule: Answer order tracking
+  steps:
+    - intent: ask_how_can_i_track_my_order
+    - action: utter_ask_how_can_i_track_my_order
+
+- rule: Answer order modification or cancellation
+  steps:
+    - intent: ask_can_i_modify_or_cancel_my_order_after_its_been_placed
+    - action: utter_ask_can_i_modify_or_cancel_my_order_after_its_been_placed
+
+- rule: Answer forgot password
+  steps:
+    - intent: ask_what_if_i_forgot_my_password
+    - action: utter_ask_what_if_i_forgot_my_password

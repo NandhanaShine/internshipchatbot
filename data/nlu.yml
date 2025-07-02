@@ -1,0 +1,44 @@
+version: "3.1"
+nlu:
+- intent: greet
+  examples: |
+    - hello
+    - hi
+    - hey
+    - good morning
+    - good evening
+
+- intent: ask_how_do_i_place_an_order
+  examples: |
+    - how do I place an order?
+    - I want to order food
+    - how can I order something?
+    - where do I place my order?
+
+- intent: ask_do_i_need_an_account_to_order
+  examples: |
+    - do I need an account to order?
+    - is it possible to order without signing in?
+    - can I check out as a guest?
+    - do I have to register to place an order?
+
+- intent: ask_how_can_i_track_my_order
+  examples: |
+    - how do I track my order?
+    - where is my food?
+    - track my delivery
+    - can I see the delivery status?
+
+- intent: ask_can_i_modify_or_cancel_my_order_after_its_been_placed
+  examples: |
+    - can I cancel my order?
+    - is it possible to modify my order?
+    - I want to change my order
+    - what if I change my mind after ordering?
+
+- intent: ask_what_if_i_forgot_my_password
+  examples: |
+    - I forgot my password
+    - how do I reset my password?
+    - I can't log in
+    - what if I forget my login details?
