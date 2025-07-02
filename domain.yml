@@ -1,0 +1,37 @@
+version: "3.1"
+
+intents:
+  - ask_how_do_i_place_an_order
+  - ask_do_i_need_an_account_to_order
+  - ask_how_can_i_track_my_order
+  - ask_can_i_modify_or_cancel_my_order_after_its_been_placed
+  - ask_what_if_i_forgot_my_password
+  - greet
+
+responses:
+  utter_greet:
+    - text: "Hi there! How can I help you with your food order today?"
+
+  utter_ask_how_do_i_place_an_order:
+    - text: "You can place an order through our app or website by adding items to your cart and proceeding to checkout."
+
+  utter_ask_do_i_need_an_account_to_order:
+    - text: "You don’t need an account to order, but having one lets you track your orders more easily."
+
+  utter_ask_how_can_i_track_my_order:
+    - text: "After placing an order, you'll receive a tracking link via SMS or email."
+
+  utter_ask_can_i_modify_or_cancel_my_order_after_its_been_placed:
+    - text: "You can modify or cancel your order within 5 minutes of placing it by contacting support."
+
+  utter_ask_what_if_i_forgot_my_password:
+    - text: "No worries! You can reset your password from the login screen using 'Forgot Password'."
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+
+
+
